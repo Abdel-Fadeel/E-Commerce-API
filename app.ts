@@ -3,6 +3,8 @@ import 'express-async-errors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
+// ROUTERS
+import authRouter from './routes/authRoutes.js';
 // Middlewares
 import errorHandlerMiddleware from './middlewares/errorHandlerMiddleware.js';
 import notFoundMiddleware from './middlewares/notFoundMiddleware.js';
@@ -15,9 +17,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('tiny'));
 // Body Parser
 app.use(express.json());
 // ROUTES
-app.get('/', (req, res) => {
-  res.send('Test');
-});
+app.use('/api/v1/auth', authRouter);
 // NOT FOUND Handler
 app.use(notFoundMiddleware);
 // Global Error Handler
