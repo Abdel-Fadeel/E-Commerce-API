@@ -15,6 +15,7 @@ export const register: Handler = async (req, res) => {
   // Create User
   const user = await User.create({ name, email, password, role });
 
+  // delete user.password;
   res.status(StatusCodes.CREATED).json({ user });
 };
 // Login User
