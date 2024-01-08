@@ -45,4 +45,10 @@ export const login: Handler = async (req, res) => {
 };
 
 // Logout User
-export const logout: Handler = async (req, res) => {};
+export const logout: Handler = async (req, res) => {
+  res.cookie('token', 'logout', {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  });
+  res.status(StatusCodes.OK).json();
+};
