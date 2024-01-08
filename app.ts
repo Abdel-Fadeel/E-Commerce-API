@@ -1,6 +1,7 @@
 import express from 'express';
 import 'express-async-errors';
 import dotenv from 'dotenv';
+import cookiesParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 // ROUTERS
@@ -16,6 +17,8 @@ const app = express();
 if (process.env.NODE_ENV === 'development') app.use(morgan('tiny'));
 // Body Parser
 app.use(express.json());
+// Cookie Parser
+app.use(cookiesParser(process.env.JWT_SECRET));
 // ROUTES
 app.use('/api/v1/auth', authRouter);
 // NOT FOUND Handler

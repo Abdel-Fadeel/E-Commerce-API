@@ -2,7 +2,7 @@ import { Handler } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import User from '../models/UserModel.js';
 import { BadRequestError } from '../utils/customErrors.js';
-import { createJWT } from '../utils/jwt.js';
+import { attachCookiesToResponse } from '../utils/jwt.js';
 
 // Register New User
 export const register: Handler = async (req, res) => {
@@ -15,12 +15,11 @@ export const register: Handler = async (req, res) => {
   const role = isFirstAccount ? 'admin' : 'user';
   // Create User
   const user = await User.create({ name, email, password, role });
-  // Create Token
+  // Create Token and send it via cookies
   const tokenUser = { name: user.name, userId: user.id, role: user.role };
-  const token = createJWT(tokenUser);
-  console.log(token);
+  attachCookiesToResponse(res, tokenUser);
 
-  res.status(StatusCodes.CREATED).json({ user, token });
+  res.status(StatusCodes.CREATED).json({ user: tokenUser });
 };
 // Login User
 export const login: Handler = async (req, res) => {
