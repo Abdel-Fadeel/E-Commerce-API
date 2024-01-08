@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 // ROUTERS
 import authRouter from './routes/authRoutes.js';
+import userRouter from './routes/userRoutes.js';
 // Middlewares
 import errorHandlerMiddleware from './middlewares/errorHandlerMiddleware.js';
 import notFoundMiddleware from './middlewares/notFoundMiddleware.js';
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(cookiesParser(process.env.JWT_SECRET));
 // ROUTES
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/users', userRouter);
 // NOT FOUND Handler
 app.use(notFoundMiddleware);
 // Global Error Handler
