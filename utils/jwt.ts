@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import jwt from 'jsonwebtoken';
 
-type TokenPayload = {
+export type TokenPayload = {
   userId: string;
   name: string;
   role: string;

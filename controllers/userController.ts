@@ -3,7 +3,8 @@ import { StatusCodes } from 'http-status-codes';
 import User from '../models/UserModel.js';
 import { NotFoundError } from '../utils/customErrors.js';
 
-export const getAllUsers = async (req: Request, res: Response) => {
+export const getAllUsers = async (req: any, res: Response) => {
+  console.log(req.user);
   const users = await User.find({ role: 'user' }).select('-password');
 
   res.status(StatusCodes.OK).json({ users });
